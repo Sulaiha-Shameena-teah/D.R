@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	         <script src="../static/js/scripts.js"></script>
+        <script type="text/javascript" src="../static/js/pagination.min.js"></script>
+		<link rel="stylesheet" href="../static/css/style.css" />
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   </head>
+   <body>
+      <div class="main_heading">
+         <h1>Customer classification</h1>
+      </div>
+      <div class="form-style">
+         <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLongTitle">Update Work details</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+					
+                  <div class="modal-body" style="background-color: #D3D3D3;">
+                     <form class="form-style" id="edit">
+                        <label for="newType">Status</label>
+                        <select class="form-control" id="newType" required>
+                           <option value="Choose type" disabled>Selete Status</option>
+                           <option value="Recieved">Recieved</option>
+                           <option value="No Response">No Response</option>
+                           <option value="Given Date">Date Given</option>
+                           <option value="Switch Off">Switch Off</option>
+                        </select>
+                        <br>
+                        <div class="col-6">
+                           <label for="editstartDate">Given date</label>
+                           <input type="date" id="editstartDate" class="form-control" value="new Date()" >
+                        </div>
+                        <div class="col-6">
+                           <label for="editstartDate">Received Amount</label>
+                           <input type="number" id="receamt" class="form-control" value="" >
+                        </div>
+                        <br>
+                        <div class="modal-footer">
+                           <button class="btn btn-primary" type="submit" name="submit">Update Details</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      </div> 
+      <div>
+         <div class="search_bar">
+            <form style="margin: auto; max-width: 300px;">
+                <input type="text" placeholder="Search.." name="search" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+      <div class="table_cont">
+      <input type="hidden" id="page_type" value="people-classify" />
+
+      <table id="electric_table">
+	  <thead>
+		<tr>
+			<th  scope="col">Customer Id</th>
+			 <th scope="col" >Customer Name</th>
+			 <th scope="col">Position</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+		<tbody>
+      </table>
+	  <td colspan="10" class="loader">
+			<div class="loading"></div>
+		</td>
+	  <div class="box">
+	    <ul id="page" class="pagination"></ul>
+	    <div class="show"></div>
+	</div>
+      <i class="thumbtack icon"></i>
+   </body>
+</html>

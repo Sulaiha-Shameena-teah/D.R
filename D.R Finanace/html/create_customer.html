@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+  <style>
+   h1
+    {
+      background:#4CAF50;color:white;border:none;border-radius:3px;cursor:pointer;}
+    }
+    #spanstyle{
+      font-weight: 800;
+      color: green;
+    } 
+    .card
+    {
+      border-radius: 25px;
+  border: 2px solid grey;
+  padding: 20px;
+ /* width: 200px;
+  height: 150px;*/
+    }
+    body {
+      background: url("bg1.jpeg");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      background-attachment: fixed; 
+      }
+  </style>
+  <div class="row">
+    <div class="col-sm-1" >
+     <!--  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      &nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp; -->
+
+</div>
+    <div class="col-sm-11">
+      <br><br>
+<b> <i> <div class="main_heading">
+            <h1 style="text-align: center; border-style: solid;
+">
+                Enter Customer Details
+            </h1>
+        </div>
+    </div>
+  </div>
+  <br>
+  <!-- <main class="d-flex align-items-center min-vh-100 py-3 py-md-0"> -->
+    <div class="container" >
+      <div class="card login-card"  >
+
+          <div class="col-md-12">
+          <!--   <div class="card-body min-vh-100">
+             
+              </div> -->
+             
+              <form action="/create.html" id="formSubmit">
+        <div class="container">
+          <br>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                  <label for="ID" class="sr-only">ID</label>
+                                        <input autofocus="" class="form-control" id="Userid" name="Userid" placeholder="User Id" required="" type="userid"/>
+                </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group mb-4">
+                   <label for="newUsername" class="sr-only">Name</label>
+                                        <input autofocus="" class="form-control" id="newUsername" name="newUsername" placeholder="Username" required="" type="username"/>
+              </div>
+            </div>
+
+        </div>
+                <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                  <label for="newMobile" class="sr-only">
+                                            Phone No
+                                        </label>
+                                        <input class="form-control" id="newMobile" name="newMobile" pattern="[0-9]{10}" placeholder="Phone No" required="" type="tel"/>
+                </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group mb-4" class="sr-only">
+                  <label for="address" class="sr-only">
+                                                Relation
+                                            </label>
+                                            <input autofocus="" class="form-control" id="relation1" name="relation1" placeholder="Relation" required="" type="text"/>
+              </div>
+            </div>
+
+        </div>
+                <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                  <label for="address" class="sr-only">
+                                            Address
+                                        </label>
+                                        <input class="form-control" id="address" name="address" placeholder="Address" required="" type="text"/>
+                </div>
+            </div>
+            <div class="col-sm-6">
+               <div class="form-group mb-1 ml-0 row text-center">
+                  <label for="address" class="sr-only">
+                                            AadharNo
+                                        </label>
+                                        <input class="form-control" id="aadharno" name="aadharno" placeholder="Aadhar No" required="" type="text"/>
+                  
+                </div>
+            </div>
+
+        </div>
+
+               
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                   <label for="address" class="sr-only">
+                                            Pan No
+                                        </label>
+                                        <input class="form-control" id="panno" name="panno" placeholder="Pan No" required="" type="text"/>
+                </div>
+              </div>
+          <div class="col-sm-6">
+                <div class="form-group mb-4">
+                 <label for="address" class="sr-only">
+                                            Work Addr
+                                        </label>
+                                        <input class="form-control" id="workaddress" name="workaddress" placeholder="Work Address" required="" type="text"/>
+                </div>
+          </div>
+        </div>
+           <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                 <label for="address" class="sr-only">
+                                            GrossPay
+                                        </label>
+                                        <input class="form-control" id="grosspay" name="grosspay" placeholder="Gross Pay" required="" type="text"/>
+                </div>
+              </div>
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                  <label for="address" class="sr-only">
+                                            NetPay
+                                        </label>
+                                        <input class="form-control" id="netpay" name="netpay" placeholder="Net Pay" required="" type="text"/>
+                </div>
+              </div>
+            </div>
+
+             <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                 <label for="address" class="sr-only">
+                                            Monthly Income
+                                        </label>
+                                        <input class="form-control" id="moninc" name="moninc" placeholder="Monthly Income" required="" type="number"/>
+                </div>
+              </div>
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                  <label for="address" class="sr-only">
+                                            Other Income
+                                        </label>
+                                        <input class="form-control" id="otherinc" name="otherinc" placeholder="Other Income" required="" type="number"/>
+                </div>
+              </div>
+            </div>
+
+             <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                 <label for="address" class="sr-only">
+                                            History
+                                        </label>
+                                        <input class="form-control" id="history" name="history" placeholder="History" required="" type="text"/>
+                </div>
+              </div>
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                  <label for="address" class="sr-only">
+                                            Loan Amount
+                                        </label>
+                                        <input class="form-control" id="loanamt" name="loanamt" placeholder="Loan Amount" required="" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            
+
+             <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                 <label for="address" class="sr-only">
+                                            Rate Of Interest
+                                        </label>
+                                        <input class="form-control" id="rateofint" name="rateofint" placeholder="Rate of Interest" required="" type="number"/>
+                </div>
+              </div>
+            <div class="col-sm-6">
+                <div class="form-group mb-4">
+                   <label for="newType" class="sr-only">
+                                            Mode of Payment
+                                        </label>
+                                        <select class="form-control" id="newType" required="">
+                                            <option value="emi">
+                                                EMI
+                                            </option>
+                                            <option value="monthly">
+                                                Monthly
+                                            </option>
+                                        </select>
+                </div>
+              </div>
+
+            </div>
+             <div class="row">
+            <div class="col-sm-6">
+            <div class="form-group mb-4">
+                  <label for="address" class="sr-only">
+                                            Property
+                                        </label>
+                                        <input class="form-control" id="property" name="property" placeholder="Property" required="" type="text"/>
+                </div>
+              </div>
+               <div class="col-sm-6">
+                <div class="form-group mb-4">
+                  <button type="button" class="btn btn-primary" class="button2"  target="_blank">
+                       Add customer
+                    </button>
+                </div>
+               </div>
+             </div>
+</div>
+            
+               
+              </form>
+          
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+  <!-- </main> -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<script>
+
+  var locate = document.getElementById("maps");
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+      locate.value = null
+    }
+  }
+  function showPosition(position) {
+    locate.value = position.coords.latitude + ', '
+      + position.coords.longitude;
+    alert("Latitude: " + position.coords.latitude +
+      ", Longitude: " + position.coords.longitude);
+  }
+
+  $('#formSubmit').submit(function (event) {
+    event.preventDefault();
+    var posting = $.post('/create.html', {
+      // name: $('#name').val(), 
+      mobile: $('#mobile').val(),
+      address: $('#address').val(),
+      maps: locate.value,
+      bhk: $('#bhk').find(":selected").text(),
+      conn: $('#connection').find(":selected").text(),
+      type: $('#type').find(":selected").text(),
+      phase: $('#phase').find(":selected").text(),
+      // content: $('#content').val()
+    });
+    posting.done(function (data) {
+      alert(data);
+      if (data == "Profile updated!")
+        window.location.href = '/profile.html';
+      else if (data == "Profile not updated!")
+        window.location.href = '/index.html';
+      else
+        window.location.href = '/404.html';
+    });
+  })
+
+  function printer() {
+    alert($('#type').find(":selected").text());
+  }
+</script>
+</html>

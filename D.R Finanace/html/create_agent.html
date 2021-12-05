@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="../static/js/scripts.js"></script>
+        <script src="../static/js/pagination.min.js" type="text/javascript"></script>
+        <link href="../static/css/style.css" rel="stylesheet"/>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="main_heading">
+            <h1>
+                Agent Details
+            </h1>
+        </div>
+        <div>
+            <div class="export_btton_container">
+              <form>
+                <button class="export_button">Export</button>
+              </form>
+            </div>
+            <div class="search_bar">
+                <form style="margin: auto; max-width: 300px;">
+                    <input name="search" placeholder="Search.." type="text"/>
+                    <button type="submit">
+                        <i class="fa fa-search">
+                        </i>
+                    </button>
+                </form>
+            </div>
+            <div class="table_cont">
+                <input id="page_type" type="hidden" value="manage-customer"/>
+                <table id="electric_table">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width :10%;">
+                                S.No
+                            </th>
+                            <th scope="col" style="width :10%;">
+                                Agent ID
+                            </th>
+                            <th scope="col">
+                                Agent name
+                            </th>
+                            <th scope="col" style="width :10%;">
+                                Mobile Number
+                            </th>
+                            
+                            <th scope="col">
+                                <button class="btn btn-info test_btn">Freeze</button>
+                                <button class="btn btn-danger test_btn">Delete</button>
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="loading">
+                </div>
+                <div class="box">
+                    <ul class="pagination" id="page">
+                    </ul>
+                    <div class="show">
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <button class="button2" data-target="#exampleModalCenter" data-toggle="modal" target="_blank">
+                        Create new agent
+                    </button>
+                    <br/>
+                </div>
+                <div class="form-style">
+                    <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade" id="exampleModalCenter" role="dialog" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="exampleModalLongTitle" style="text-align: center;">
+                                        Enter Agent details
+                                    </h3>
+                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                        <span aria-hidden="true">
+                                            ×
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" style="background-color: #D3D3D3;">
+                                    <form action="/" class="form-style" id="newuser" method="POST">
+                                        <label for="newUsername">
+                                            Agent ID
+                                        </label>
+                                        <input autofocus="" class="form-control" id="Userid" name="Userid" placeholder="User Id" required="" type="userid"/>
+                                        <br/>
+                                        <label for="newUsername">
+                                            Agent Name
+                                        </label>
+                                        <input autofocus="" class="form-control" id="newUsername" name="newUsername" placeholder="Username" required="" type="username"/>
+                                        <br/>
+                                        <label for="newMobile">
+                                            Mobile No
+                                        </label>
+                                        <input class="form-control" id="newMobile" name="newMobile" pattern="[0-9]{10}" placeholder="Phone No" required="" type="tel"/>
+                                        <br/>
+                                        
+                                        <div class="modal-footer">
+                                            <button class="btn btn-success test_btn" id="freeze" name="submit" type="submit">
+                                                Freeze
+                                            </button>
+                                            <button class="btn btn-danger test_btn" id="delete" name="submit" type="submit">
+                                                Delete
+                                            </button>
+                                            <button class="btn btn-primary test_btn" id="create" name="submit" type="submit">
+                                                Add Agent
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+       <script src="../static/js/scripts.js"></script>
+        <script type="text/javascript" src="../static/js/pagination.min.js"></script>
+		<link rel="stylesheet" href="../static/css/style.css" />
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    </head>
+    <body>
+        <div class="main_heading">
+         <h1>Report</h1>
+      </div>
+        <div>
+			<div class="search_bar">
+				<form style="margin: auto; max-width: 300px;">
+					<input type="text" placeholder="Search.." name="search" />
+					<button type="submit"><i class="fa fa-search"></i></button>
+				</form>
+			</div>
+            <div class="table_cont">
+			 <input type="hidden" id="page_type" value="daily-report" />
+                <table id="electric_table">
+					<thead>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Customer Id</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Previous Balance</th>
+                    <th scope="col">Recieved Amount</th>
+                    <th scope="col">Current Balance</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Percentage</th>
+					</thead>
+					<tbody>
+					</tbody>
+                </table>
+                <i class="thumbtack icon"></i>
+				<div class="loading"></div>
+				<div class="box">
+				<ul id="page" class="pagination"></ul>
+				<div class="show"></div>
+				</div>
+            </div>
+        </div>
+    </body>
+</html>

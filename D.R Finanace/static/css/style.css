@@ -1,0 +1,137 @@
+*{margin:0px;padding:0px;}
+body>div{margin:30px;}
+#electric_table {font-family: Arial, Helvetica, sans-serif;border-collapse: collapse;width: 100%;}
+#electric_table td, #electric_table th {border: 1px solid #ddd;padding: 8px;}
+#electric_table tr:nth-child(even){background-color: #f2f2f2;}
+#electric_table tr:hover {background-color: #ddd;}
+#electric_table th {padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4CAF50;color: white;}
+#electric_table input{padding:5px;width:150px;}
+#electric_table img{cursor:pointer;}
+#electric_table th{width:10%;}
+#electric_table th:nth-child(1), #electric_table td:nth-child(1){width:5%;text-align: center;}
+#electric_table th:nth-child(5), #electric_table td:nth-child(5){width:15%;text-align: center;}
+.save_btn, .cancel_btn{display:none;width:30% ! important;background:#4CAF50;color:white;border:none;padding: 8px !important;border-radius: 3px;}
+.add_row .save_btn, .add_row .cancel_btn,.edit_btn_container .save_btn,.edit_btn_container .cancel_btn{display:inline-block;margin:0px 3px;}
+.add_row .tbl_edit_btn{display:none;}
+#electric_table td p{margin:0px;}
+.add_btn_cont{text-align:right;}
+.add_btn_cont input{padding:5px 15px;margin-bottom:10px;background:#4CAF50;color:white;border:none;border-radius:3px;cursor:pointer;}
+.ui-datepicker-calendar {display: none;}
+
+/* Daily work page start */
+.main_heading{text-align:center;font-weight: bold;}
+/* Daily work page end */
+
+/* Loader div */
+.loading {
+  height: 0;
+  width: 0;
+  padding: 35px;
+  border: 6px solid #ccc;
+  border-right-color: #888;
+  border-radius: 55px;
+  -webkit-animation: rotate 1s infinite linear;
+  /* left, top and position just for the demo! */
+  position: relative;
+  left: 50%;
+  top: 50%;
+  margin-top:25px;
+}
+
+@-webkit-keyframes rotate {
+  /* 100% keyframe for  clockwise. 
+     use 0% instead for anticlockwise */
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+.loader{padding:0px !important;}
+/* Loader div */
+
+/*pagination css*/
+	.container{
+			margin: 100px auto;
+		}
+		.box,.show{
+			margin: 20px auto;
+			text-align: center;
+		}
+		.show{
+			padding: 10px 0;
+		}
+		/*!
+ * pagination v1.4.1 (https://github.com/nashaofu/pagination)
+ * Copyright 2018 nashaofu
+ * Licensed under MIT
+ */
+ul.pagination:after,ul.pagination:before{display:table;content:' '}ul.pagination{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:18px;line-height:36px;display:table;margin:0 auto;padding:0;list-style:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}ul.pagination:after{clear:both}ul.pagination>li{float:left;margin:0 2px;padding:0}ul.pagination>li>a{display:block;margin:0;padding:0 14px;cursor:pointer;text-align:center;text-decoration:none;border-radius:4px;background-color:#fff;line-height: 35px;}ul.pagination>li>a:hover{border:1px solid #08f}
+ul.pagination>li>span{border:none;display:inline;padding:7px 10px;cursor:default;text-align:center;}ul.pagination>li.active>a,ul.pagination>li.active>a:focus,ul.pagination>li.active>a:hover{cursor:default;color:#fff;border:1px solid #4CAF50;outline:0;background-color:#4CAF50}ul.pagination>li.disabled>a,ul.pagination>li.disabled>a:focus,ul.pagination>li.disabled>a:hover{cursor:not-allowed;color:#999;border:1px solid #ccc;outline:0;background-color:#fff}
+.pagination{display:none}
+.pagination>li>a, .pagination>li>span{color:#000000;}
+/*pagination css*/
+
+
+/*Search bar css*/
+
+* {
+  box-sizing: border-box;
+}
+
+.search_bar>form input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+.search_bar>form button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #4CAF50;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+.search_bar>form button:hover {
+  background: #4CAF80;
+}
+
+.search_bar>form::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.search_bar>form{
+	margin:auto;
+	max-width:300px;
+}
+.search_bar{float:right;margin-bottom:20px;}
+
+/*Search bar css*/
+
+.modal{position: center;}
+
+/*invenstor details*/
+	.button2 {
+		background-color: #008CBA;
+		/* Green */
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+/*invenstor details*/
+
+.export_btton_container{float:right;margin-left:15px;}
+.export_btton_container .export_button{padding: 13px;background:#4CAF50;color:#fff;border:none;font-weight: bold;}
