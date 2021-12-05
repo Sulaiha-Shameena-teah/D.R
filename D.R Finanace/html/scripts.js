@@ -53,6 +53,12 @@ const manage_customer_details = {
 	'data-accessors':{'id':'customer_id','name':'customer_name','emi':'emi','pending':'pending','bal':'balance','status':'status','date':'collection_date','rec_amt':'received_amt','agent_id':'agent_id','percentage':'percentage'}	
 };
 
+const create_customer_details = {
+	'page-value':'create-customer',
+	'store-endpoint':"data-store",
+	'data-accessors':{'id':'customer_id','name':'customer_name','phone': 'phone_number', 'relation': 'relation', 'address': 'address', 'aadharNo': 'aadhar_number', 'panNo': 'pan_number', 'workAddress': 'work_address', 'grossPay': 'gross_pay', 'netPay': 'net_pay', 'monthlyIncome' : 'monthly_income', 'otherIncome': 'other_income', 'history': 'history', 'loanAmount': 'loan_amount', 'rateOfInterest': 'rate_of_interest', 'emi': 'emi', 'property': 'property'}	
+};
+
 
 const rows_per_page =10;
 const agent_id =100;
@@ -316,6 +322,40 @@ $(document).ready(function(){
 			var row_id = $(this).parent().parent().attr('class');
 			$(".modal-content").attr('data-row-id',row_id);
 		}
+	});
+	$(document).on('click','.add-customer',function(e){
+		var post_endpoint = create_customer_details['store-endpoint'];
+		var request_json = {
+			customer_id: ('#Userid').text() ? ('#Userid').text() : 0,
+			customer_name: ('#newUsername').text() ? ('#newUsername').text() : 0,
+			phone_number: ('#newMobile').text() ? ('#newMobile').text() : 0, 
+			relation: ('#relation1').text() ? ('#relation1').text() : 0,
+			address: ('#address').text() ? ('#address').text() : 0,
+			aadhar_number: ('#aadharno').text() ? ('#aadharno').text() : 0,
+			pan_number: ('#panno').text() ? ('#panno').text() : 0,
+			work_address: ('#workaddress').text() ? ('#workaddress').text() : 0,
+			gross_pay: ('#grosspay').text() ? ('#grosspay').text() : 0,
+			net_pay: ('#netpay').text() ? ('#netpay').text() : 0,
+			monthly_income: ('#moninc').text() ? ('#moninc').text() : 0,
+			other_income: ('#otherinc').text() ? ('#otherinc').text() : 0,
+			history: ('#history').text() ? ('#history').text() : 0,
+			loan_amount: ('#loanamt').text() ? ('#loanamt').text() : 0,
+			rate_of_interest: ('#rateofint').text() ? ('#rateofint').text() : 0,
+			emi: ('#newType').text() ? ('#newType').text() : 0,
+			property: ('#property').text() ? ('#property').text() : 0,
+			
+		}
+		$.ajax({
+		headers: { 
+			'Accept': 'application/json',
+			'Content-Type': 'application/json' 
+			},		
+		method: "POST",
+		data:JSON.stringify(request_json),
+		url: base_url+post_endpoint
+		}).done(function( data) {
+			alert(data_updated_message);
+		});
 	});
 });
 
