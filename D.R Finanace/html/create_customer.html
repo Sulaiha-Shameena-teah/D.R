@@ -6,7 +6,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="../static/js/scripts.js"></script>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
@@ -71,6 +75,7 @@
         <div class="container">
           <br>
         <div class="row">
+          <input id="page_type" type="hidden" value="create-customer"/>
             <div class="col-sm-6">
                 <div class="form-group mb-4">
                   <label for="ID" class="sr-only">ID</label>
@@ -240,7 +245,7 @@
               </div>
                <div class="col-sm-6">
                 <div class="form-group mb-4">
-                  <button type="button" class="btn btn-primary" class="button2"  target="_blank">
+                  <button type="button" class="add-customer btn btn-primary" class="button2"  target="_blank">
                        Add customer
                     </button>
                 </div>
