@@ -1,5 +1,5 @@
 
-const base_url = "http://localhost:8080/";
+const base_url = "https://protected-garden-36193.herokuapp.com/";
 
 const daily_work_details = {
 	'page-value':'daily-work',
@@ -31,6 +31,20 @@ const manage_customer_details = {
 	'export-endpoint':"customer-export",
 	'data-accessors':{'id':'customer_id','name':'customer_name','emi':'emi','pending':'pending','bal':'balance','status':'status','date':'collection_date','rec_amt':'received_amt','agent_id':'agent_id','percentage':'percentage'}	
 };
+const create_customer_details = {
+	'page-value':'create-customer',
+	'store-endpoint':"data-store",
+	'data-accessors':{'id':'customer_id','name':'customer_name','phone': 'phone_number', 'relation': 'relation', 'address': 'address', 'aadharNo': 'aadhar_number', 'panNo': 'pan_number', 'workAddress': 'work_address', 'grossPay': 'gross_pay', 'netPay': 'net_pay', 'monthlyIncome' : 'monthly_income', 'otherIncome': 'other_income', 'history': 'history', 'loanAmount': 'loan_amount', 'rateOfInterest': 'rate_of_interest', 'emi': 'emi', 'property': 'property'}	
+};
+
+const create_agent_details = {
+	'page-value':'create-agent',
+	'data-endpoint':"data-retrieve",
+	'store-endpoint':"data-store",
+	'delete-agent': "data-store",
+	'freeze-agent': "data-store",
+	'data-accessors':{'agentId': 'agent_id', 'agentName': 'agent_name', 'mobileNo': 'mobile_number'}	
+};
 
 const rows_per_page =10;
 const agent_id =100;
@@ -46,6 +60,8 @@ $(document).ready(function(){
 			renderDailyReportTable(1);
 		}else if($("#page_type").val() == manage_customer_details['page-value']){
 			renderCustomerTable(1);
+		}else if($("#page_type").val() == create_agent_details['page-value']){
+			renderAgentTable(1);
 		}
 		// load the table intially based on page type
 	
@@ -191,6 +207,8 @@ $(document).ready(function(){
 				renderDailyWorkTable(1);
 		}else if($("#page_type").val() ==  daily_report_details['page-value']){
 				renderDailyReportTable(1);
+		}else if($("#page_type").val() ==  create_agent_details['page-value']){
+			renderAgentTable(1);
 		}
 	});
 
@@ -216,6 +234,89 @@ $(document).ready(function(){
 			var row_id = $(this).parent().parent().attr('class');
 			$(".modal-content").attr('data-row-id',row_id);
 		}
+	});
+	$(document).on('click','.add-customer',function(e){
+		if(!checkValid($('#Userid').val()) && !checkValid($('#newUsername').val()) && !checkValid($('#newMobile').val()) 
+		&& !checkValid($('#relation1').val()) && !checkValid($('#address').val()) && !checkValid($('#aadharno').val()) && !checkValid($('#panno').val())&& !checkValid($('#workaddress').val()) && !checkValid($('#grosspay').val()) &&  !checkValid($('#netpay').val()) && !checkValid($('#moninc').val()) && !checkValid($('#otherinc').val()) && !checkValid($('#history').val()) && !checkValid($('#loanamt').val()) && !checkValid($('#rateofint').val()) && !checkValid($('#newType').val()) && !checkValid($('#property').val())){
+			console.log('enter req fields')
+			return false;
+		}
+		console.log('.add-customer');
+		var post_endpoint = create_customer_details['store-endpoint'];
+		var request_json = {
+			customer_id: $('#Userid').val() ? $('#Userid').val() : 0,
+			customer_name: $('#newUsername').val() ? $('#newUsername').val() : 0,
+			phone_number: $('#newMobile').val() ? $('#newMobile').val() : 0, 
+			relation: $('#relation1').val() ? $('#relation1').val() : 0,
+			address: $('#address').val() ? $('#address').val() : 0,
+			aadhar_number: $('#aadharno').val() ? $('#aadharno').val() : 0,
+			pan_number: $('#panno').val() ? $('#panno').val() : 0,
+			work_address: $('#workaddress').val() ? $('#workaddress').val() : 0,
+			gross_pay: $('#grosspay').val() ? $('#grosspay').val() : 0,
+			net_pay: $('#netpay').val() ? $('#netpay').val() : 0,
+			monthly_income: $('#moninc').val() ? $('#moninc').val() : 0,
+			other_income: $('#otherinc').val() ? $('#otherinc').val() : 0,
+			history: $('#history').val() ? $('#history').val() : 0,
+			loan_amount: $('#loanamt').val() ? $('#loanamt').val() : 0,
+			rate_of_interest: $('#rateofint').val() ? $('#rateofint').val() : 0,
+			emi: $('#newType').val() ? $('#newType').val() : 0,
+			property: $('#property').val() ? $('#property').val() : 0,
+			
+		}
+		$.ajax({
+		headers: { 
+			'Accept': 'application/json',
+			'Content-Type': 'application/json' 
+			},		
+		method: "POST",
+		data:JSON.stringify(request_json),
+		url: base_url+post_endpoint
+		}).done(function( data) {
+			alert(data_updated_message);
+		});
+	});
+	$(document).on('click','#newuser',function(e){
+		var post_endpoint = create_agent_details['store-endpoint'];
+		var request_json = {
+			agent_id: ('#Userid').text() ? ('#Userid').text() : 0,
+			agent_name: ('#newUsername').text() ? ('#newUsername').text() : 0,
+			mobile_number: ('#newMobile').text() ? ('#newMobile').text() : 0
+		}
+		$.ajax({
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+				},		
+			method: "POST",
+			data:JSON.stringify(request_json),
+			url: base_url+post_endpoint
+			}).done(function( data) {
+				alert(data_updated_message);
+			});
+	});
+	$(document).on('click','.create-agent-btn',function(e){
+		if(!checkValid($('#Userid').val()) && !checkValid($('#newUsername').val()) && !checkValid($('#newMobile').val())){
+			console.log('enter req fields')
+			return false;
+		}
+		console.log('agent table')
+		var post_endpoint = create_agent_details['store-endpoint'];
+		var request_json = {
+			agent_id: $('#Userid').val() ? $('#Userid').val() : 0,
+			agent_name: $('#newUsername').val() ? $('#newUsername').val() : 0,
+			mobile_number: $('#newMobile').val() ? $('#newMobile').val() : 0
+		}
+		$.ajax({
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+				},		
+			method: "POST",
+			data:JSON.stringify(request_json),
+			url: base_url+post_endpoint
+			}).done(function( data) {
+				alert(data_updated_message);
+			});
 	});
 });
 
@@ -532,22 +633,22 @@ function renderAgentTable(page_no){
 	var search_val = $("[name='search']").val();
 	$.ajax({
 	method: "GET",
-	url: base_url+investor_report_endpoint+"?limit="+limit+"&offset="+offset+"&query="+search_val
+	url: base_url+ create_agent_details['data-endpoint'] +"?limit="+limit+"&offset="+offset+"&query="+search_val
 	}).done(function( data) {
-		//data = JSON.parse(data);
+		data = JSON.parse(data);
 		//console.log("data.length");
 		//console.log(data);
 		var total_count;
 		if(data['dataSize'] != undefined){
 			total_count = data['dataSize'];
 		}
-		//console.log("total_count");
-		//console.log(total_count);
+		console.log("total_count");
+		console.log(total_count);
 
 		if(total_count > 0){
-			$.each(data['dailyWorksList'], function(index,val){
-						
-				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val[agent_report_accessor['agent_id']]!=undefined ? val[agent_report_accessor['agent_id']] : "")+'</td><td>'+(val[agent_report_accessor['name']]!=undefined ? val[agent_report_accessor['name']] : "")+'</td><td class="phone">'+(val[agent_report_accessor['phone']]!=undefined ? val[agent_report_accessor['phone']] : "")+'</td><td class="addr">'+(val[agent_report_accessor['addr']]!=undefined ? val[agent_report_accessor['addr']] : "")+'</td><td class="aadhar">'+(val[agent_report_accessor['aadhar']]!=undefined ? val[agent_report_accessor['aadhar']] : "")+'</td><td class="pan">'+(val[agent_report_accessor['pan']]!=undefined ? val[agent_report_accessor['pan']] : "")+'</td>';
+			console.log('abcd')
+			$.each(data['dataList'], function(index,val){
+				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val[create_agent_details['agentId']]!=undefined ? val[create_agent_details['agentId']] : "")+'</td><td>'+(val[create_agent_details['agentName']]!=undefined ? val[create_agent_details['agentName']] : "")+'</td><td class="phone">'+(val[create_agent_details['mobileNo']]!=undefined ? val[create_agent_details['mobileNo']] : "")+'</td>' + "<td><button class='btn btn-info' freezeId="+create_agent_details['agentId']+" onclick='freezeAgent(this.freezeId)'>Freeze</button></td>" + "<td><button class='btn btn-danger' deleteId="+create_agent_details['agentId']+" onclick='deleteAgent(this.deleteId)'>Delete</button></td>" ;
 				$("#electric_table").append(append_table);
 			});
 			if(total_count >10){
@@ -560,6 +661,28 @@ function renderAgentTable(page_no){
 		}
 		$(".loading").hide();
   });
+}
+
+function freezeAgent(freezeId) {
+	console.log("freeze",freezeId);
+	const freezeURL = base_url + create_agent_details['freeze-agent'] + "/"  + freezeId
+	$.ajax({
+		method: "POST",
+		url: freezeURL
+		}).done(function( data) {
+			alert(data_updated_message);
+		});
+	
+}
+function deleteAgent(deleteId) {
+	console.log("delete",deleteId);
+	const deleteURL = base_url + create_agent_details['delete-agent'] + "/"  + deleteId
+	$.ajax({
+		method: "DELETE",
+		url: deleteURL
+		}).done(function( data) {
+			alert(data_updated_message);
+		});
 }
 
 function renderAdminWorkTable(page_no){

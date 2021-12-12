@@ -59,6 +59,11 @@ const create_customer_details = {
 	'data-accessors':{'id':'customer_id','name':'customer_name','phone': 'phone_number', 'relation': 'relation', 'address': 'address', 'aadharNo': 'aadhar_number', 'panNo': 'pan_number', 'workAddress': 'work_address', 'grossPay': 'gross_pay', 'netPay': 'net_pay', 'monthlyIncome' : 'monthly_income', 'otherIncome': 'other_income', 'history': 'history', 'loanAmount': 'loan_amount', 'rateOfInterest': 'rate_of_interest', 'emi': 'emi', 'property': 'property'}	
 };
 
+const create_agent_details = {
+	'page-value':'create-agent',
+	'store-endpoint':"data-store",
+	'data-accessors':{'agentId': 'agent_id', 'agentName': 'agent_name', 'mobileNo': 'mobile_number'}	
+};
 
 const rows_per_page =10;
 const agent_id =100;
@@ -74,6 +79,8 @@ $(document).ready(function(){
 			renderDailyReportTable(1);
 		}else if($("#page_type").val() == manage_customer_details['page-value']){
 			renderCustomerTable(1);
+		}else if($("#page_type").val() == create_agent_details['page-value']){
+			renderAgentTable(1);
 		}
 		// load the table intially based on page type
 	
@@ -356,6 +363,25 @@ $(document).ready(function(){
 		}).done(function( data) {
 			alert(data_updated_message);
 		});
+	});
+	$(document).on('click','#newuser',function(e){
+		var post_endpoint = create_agent_details['store-endpoint'];
+		var request_json = {
+			agent_id: ('#Userid').text() ? ('#Userid').text() : 0,
+			agent_name: ('#newUsername').text() ? ('#newUsername').text() : 0,
+			mobile_number: ('#newMobile').text() ? ('#newMobile').text() : 0
+		}
+		$.ajax({
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+				},		
+			method: "POST",
+			data:JSON.stringify(request_json),
+			url: base_url+post_endpoint
+			}).done(function( data) {
+				alert(data_updated_message);
+			});
 	});
 });
 
@@ -672,7 +698,7 @@ function renderAgentTable(page_no){
 	var search_val = $("[name='search']").val();
 	$.ajax({
 	method: "GET",
-	url: base_url+investor_report_endpoint+"?limit="+limit+"&offset="+offset+"&query="+search_val
+	url: base_url+ create_agent_details['page-value'] +"?limit="+limit+"&offset="+offset+"&query="+search_val
 	}).done(function( data) {
 		//data = JSON.parse(data);
 		//console.log("data.length");
@@ -686,8 +712,7 @@ function renderAgentTable(page_no){
 
 		if(total_count > 0){
 			$.each(data['dailyWorksList'], function(index,val){
-						
-				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val[agent_report_accessor['agent_id']]!=undefined ? val[agent_report_accessor['agent_id']] : "")+'</td><td>'+(val[agent_report_accessor['name']]!=undefined ? val[agent_report_accessor['name']] : "")+'</td><td class="phone">'+(val[agent_report_accessor['phone']]!=undefined ? val[agent_report_accessor['phone']] : "")+'</td><td class="addr">'+(val[agent_report_accessor['addr']]!=undefined ? val[agent_report_accessor['addr']] : "")+'</td><td class="aadhar">'+(val[agent_report_accessor['aadhar']]!=undefined ? val[agent_report_accessor['aadhar']] : "")+'</td><td class="pan">'+(val[agent_report_accessor['pan']]!=undefined ? val[agent_report_accessor['pan']] : "")+'</td>';
+				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val[create_agent_details['agentId']]!=undefined ? val[create_agent_details['agentId']] : "")+'</td><td>'+(val[create_agent_details['agentName']]!=undefined ? val[create_agent_details['agentName']] : "")+'</td><td class="phone">'+(val[create_agent_details['mobileNo']]!=undefined ? val[create_agent_details['mobileNo']] : "")+'</td>';
 				$("#electric_table").append(append_table);
 			});
 			if(total_count >10){
