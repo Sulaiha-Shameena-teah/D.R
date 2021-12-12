@@ -41,6 +41,8 @@ const create_agent_details = {
 	'page-value':'create-agent',
 	'data-endpoint':"data-retrieve",
 	'store-endpoint':"data-store",
+	'delete-agent': "data-store",
+	'freeze-agent': "data-store",
 	'data-accessors':{'agentId': 'agent_id', 'agentName': 'agent_name', 'mobileNo': 'mobile_number'}	
 };
 
@@ -234,6 +236,11 @@ $(document).ready(function(){
 		}
 	});
 	$(document).on('click','.add-customer',function(e){
+		if(!checkValid($('#Userid').val()) && !checkValid($('#newUsername').val()) && !checkValid($('#newMobile').val()) 
+		&& !checkValid($('#relation1').val()) && !checkValid($('#address').val()) && !checkValid($('#aadharno').val()) && !checkValid($('#panno').val())&& !checkValid($('#workaddress').val()) && !checkValid($('#grosspay').val()) &&  !checkValid($('#netpay').val()) && !checkValid($('#moninc').val()) && !checkValid($('#otherinc').val()) && !checkValid($('#history').val()) && !checkValid($('#loanamt').val()) && !checkValid($('#rateofint').val()) && !checkValid($('#newType').val()) && !checkValid($('#property').val())){
+			console.log('enter req fields')
+			return false;
+		}
 		console.log('.add-customer');
 		var post_endpoint = create_customer_details['store-endpoint'];
 		var request_json = {
@@ -287,7 +294,11 @@ $(document).ready(function(){
 				alert(data_updated_message);
 			});
 	});
-	$(document).on('click','.create-agent',function(e){
+	$(document).on('click','.create-agent-btn',function(e){
+		if(!checkValid($('#Userid').val()) && !checkValid($('#newUsername').val()) && !checkValid($('#newMobile').val())){
+			console.log('enter req fields')
+			return false;
+		}
 		console.log('agent table')
 		var post_endpoint = create_agent_details['store-endpoint'];
 		var request_json = {
@@ -637,7 +648,7 @@ function renderAgentTable(page_no){
 		if(total_count > 0){
 			console.log('abcd')
 			$.each(data['dataList'], function(index,val){
-				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val[create_agent_details['agentId']]!=undefined ? val[create_agent_details['agentId']] : "")+'</td><td>'+(val[create_agent_details['agentName']]!=undefined ? val[create_agent_details['agentName']] : "")+'</td><td class="phone">'+(val[create_agent_details['mobileNo']]!=undefined ? val[create_agent_details['mobileNo']] : "")+'</td>';
+				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val[create_agent_details['agentId']]!=undefined ? val[create_agent_details['agentId']] : "")+'</td><td>'+(val[create_agent_details['agentName']]!=undefined ? val[create_agent_details['agentName']] : "")+'</td><td class="phone">'+(val[create_agent_details['mobileNo']]!=undefined ? val[create_agent_details['mobileNo']] : "")+'</td>' + "<td><button class='btn btn-info' freezeId="+create_agent_details['agentId']+" onclick='freezeAgent(this.freezeId)'>Freeze</button></td>" + "<td><button class='btn btn-danger' deleteId="+create_agent_details['agentId']+" onclick='deleteAgent(this.deleteId)'>Delete</button></td>" ;
 				$("#electric_table").append(append_table);
 			});
 			if(total_count >10){
@@ -650,6 +661,28 @@ function renderAgentTable(page_no){
 		}
 		$(".loading").hide();
   });
+}
+
+function freezeAgent(freezeId) {
+	console.log("freeze",freezeId);
+	const freezeURL = base_url + create_agent_details['freeze-agent'] + "/"  + freezeId
+	$.ajax({
+		method: "POST",
+		url: freezeURL
+		}).done(function( data) {
+			alert(data_updated_message);
+		});
+	
+}
+function deleteAgent(deleteId) {
+	console.log("delete",deleteId);
+	const deleteURL = base_url + create_agent_details['delete-agent'] + "/"  + deleteId
+	$.ajax({
+		method: "DELETE",
+		url: deleteURL
+		}).done(function( data) {
+			alert(data_updated_message);
+		});
 }
 
 function renderAdminWorkTable(page_no){
