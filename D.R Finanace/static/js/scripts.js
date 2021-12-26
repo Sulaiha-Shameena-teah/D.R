@@ -43,7 +43,7 @@ const create_agent_details = {
 	'store-endpoint':"data-store",
 	'delete-agent': "data-store",
 	'freeze-agent': "data-store",
-	'data-accessors':{'agentId': 'agent_id', 'agentName': 'agent_name', 'mobileNo': 'mobile_number'}	
+	'data-accessors':{'agentId': 'agent_id', 'agentIdByCompany': 'agent_id_by_company' ,'agentName': 'agent_name', 'mobileNo': 'mobile_number'}	
 };
 
 const rows_per_page =10;
@@ -648,7 +648,7 @@ function renderAgentTable(page_no){
 		if(total_count > 0){
 			console.log('abcd')
 			$.each(data['dataList'], function(index,val){
-				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val[create_agent_details['agentId']]!=undefined ? val[create_agent_details['agentId']] : "")+'</td><td>'+(val[create_agent_details['agentName']]!=undefined ? val[create_agent_details['agentName']] : "")+'</td><td class="phone">'+(val[create_agent_details['mobileNo']]!=undefined ? val[create_agent_details['mobileNo']] : "")+'</td>' + "<td><button class='btn btn-info' freezeId="+create_agent_details['agentId']+" onclick='freezeAgent(this.freezeId)'>Freeze</button></td>" + "<td><button class='btn btn-danger' deleteId="+create_agent_details['agentId']+" onclick='deleteAgent(this.deleteId)'>Delete</button></td>" ;
+				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val[create_agent_details['agentId']]!=undefined ? val[create_agent_details['agentId']] : "")+'</td><td class="agent_id_by_company">'+(val[create_agent_details['agentIDByCompany']]!=undefined ? val[create_agent_details['agentIDByCompany']] : "")+'</td><td class="agent_name">'+(val[create_agent_details['agentName']]!=undefined ? val[create_agent_details['agentName']] : "")+'</td><td class="phone">'+(val[create_agent_details['mobileNo']]!=undefined ? val[create_agent_details['mobileNo']] : "")+'</td>' + "<td><button class='btn btn-info' freezeId="+create_agent_details['agentId']+" onclick='freezeAgent(this.freezeId)'>Freeze</button></td>" + "<td><button class='btn btn-danger' deleteId="+create_agent_details['agentId']+" onclick='deleteAgent(this.deleteId)'>Delete</button></td>" ;
 				$("#electric_table").append(append_table);
 			});
 			if(total_count >10){
