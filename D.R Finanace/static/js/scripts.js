@@ -46,6 +46,15 @@ const create_agent_details = {
 	'data-accessors':{'agentId': 'agent_id', 'agentIdByCompany': 'agent_id_by_company' ,'agentName': 'agent_name', 'mobileNo': 'mobile_number'}	
 };
 
+const login_details = {
+	'page-value':'login-form',
+	'data-endpoint':"data-retrieve",
+	'store-endpoint':"data-store",
+	'delete-agent': "data-store",
+	'freeze-agent': "data-store",
+	'data-accessors':{ 'userName': 'user_name', 'password': 'password'}	
+}
+
 const rows_per_page =10;
 const agent_id =100;
 
@@ -305,6 +314,32 @@ $(document).ready(function(){
 			agent_id: $('#Userid').val() ? $('#Userid').val() : 0,
 			agent_name: $('#newUsername').val() ? $('#newUsername').val() : 0,
 			mobile_number: $('#newMobile').val() ? $('#newMobile').val() : 0
+		}
+		$.ajax({
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+				},		
+			method: "POST",
+			data:JSON.stringify(request_json),
+			url: base_url+post_endpoint
+			}).done(function( data) {
+				alert(data_updated_message);
+			});
+	});
+
+	$(document).on('click','#loginFormSumbit',function(e){
+		e.preventDefault();
+		console.log($('#username').val(), $('#password').val(), !checkValid($('#username').val()) , !checkValid($('#password').val()))
+		if(!checkValid($('#username').val()) && !checkValid($('#password').val())){
+			console.log('enter req fields')
+			return false;
+		}
+		console.log('working');
+		var post_endpoint = login_details['store-endpoint'];
+		var request_json = {
+			username: $('#username').val() ? $('#username').val() : 0,
+			password: $('#password').val() ? $('#password').val() : 0
 		}
 		$.ajax({
 			headers: { 
@@ -929,7 +964,7 @@ function renderPagination(total,current,length,size){
 }
 
 function checkValid(v){
-	if(v != "" && v != undefined && v!=null && !isNaN(v)){
+	if(v != "" && v != undefined && v!=null){
 		return true;
 	}else{
 		return false;

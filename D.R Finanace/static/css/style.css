@@ -135,3 +135,17 @@ ul.pagination>li>span{border:none;display:inline;padding:7px 10px;cursor:default
 
 .export_btton_container{float:right;margin-left:15px;}
 .export_btton_container .export_button{padding: 13px;background:#4CAF50;color:#fff;border:none;font-weight: bold;}
+
+.inputGetter{
+  width: 100%;
+}
+
+.loginForm{
+  display: flex;
+  justify-content: center;
+}
+
+.loginForm form{
+  width: 100%;
+  max-width: 580px;
+}
