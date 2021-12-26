@@ -253,10 +253,14 @@ $(document).ready(function(){
 		console.log('.add-customer');
 		var post_endpoint = create_customer_details['store-endpoint'];
 		var request_json = {
-			customer_id: $('#Userid').val() ? $('#Userid').val() : 0,
+			// customer_id: $('#Userid').val() ? $('#Userid').val() : 0,
 			customer_name: $('#newUsername').val() ? $('#newUsername').val() : 0,
 			phone_number: $('#newMobile').val() ? $('#newMobile').val() : 0, 
 			relation: $('#relation1').val() ? $('#relation1').val() : 0,
+			phone_number_2: $('#newMobile2').val() ? $('#newMobile2').val() : 0, 
+			relation2: $('#relation2').val() ? $('#relation2').val() : 0,
+			phone_number_3: $('#newMobile3').val() ? $('#newMobile3').val() : 0, 
+			relation3: $('#relation3').val() ? $('#relation3').val() : 0,
 			address: $('#address').val() ? $('#address').val() : 0,
 			aadhar_number: $('#aadharno').val() ? $('#aadharno').val() : 0,
 			pan_number: $('#panno').val() ? $('#panno').val() : 0,
@@ -270,8 +274,11 @@ $(document).ready(function(){
 			rate_of_interest: $('#rateofint').val() ? $('#rateofint').val() : 0,
 			emi: $('#newType').val() ? $('#newType').val() : 0,
 			property: $('#property').val() ? $('#property').val() : 0,
+			emiAmount: $('#emiAmount').val() ? $('#emiAmount').val() : 0,
+			collectionDate: $('#collectionDate').val() ? $('#collectionDate').val() : 0,
 			
 		}
+		console.log('request_json', request_json);
 		$.ajax({
 		headers: { 
 			'Accept': 'application/json',
