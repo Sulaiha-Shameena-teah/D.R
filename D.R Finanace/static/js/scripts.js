@@ -29,7 +29,7 @@ const manage_customer_details = {
 	'search-endpoint':"data-search",
 	'store-endpoint':"data-store",
 	'export-endpoint':"customer-export",
-	'data-accessors':{'id':'customer_id','name':'customer_name','emi':'emi','pending':'pending','bal':'balance','status':'status','date':'collection_date','rec_amt':'received_amt','agent_id':'agent_id','percentage':'percentage'}	
+	'data-accessors':{'id':'customer_id','name':'customer_name','agent' : 'agent','phone': 'phone_number', 'relation': 'relation','phone2': 'phone_number_2', 'relation2': 'relation2','phone3': 'phone_number_3', 'relation3': 'relation3', 'address': 'address', 'aadharNo': 'aadhar_number', 'panNo': 'pan_number', 'workAddress': 'work_address', 'grossPay': 'gross_pay', 'netPay': 'net_pay', 'monthlyIncome' : 'monthly_income', 'otherIncome': 'other_income', 'history': 'history', 'loanAmount': 'loan_amount', 'rateOfInterest': 'rate_of_interest', 'emi': 'emi', 'property': 'property', 'collectionDate': 'collection_date', 'emiAmount': 'emi_amount'}	
 };
 const create_customer_details = {
 	'page-value':'create-customer',
@@ -574,24 +574,30 @@ function renderCustomerTable(page_no){
 				$.each(data['dataList'], function(index,val){
 							
 					var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td>'+
-					'<td class="investor_id">'+(val[manage_customer_details['data-accessors']['investor_id']]!=undefined ? val[manage_customer_details['data-accessors']['investor_id']] : "")+'</td>'+
-					'<td>'+(val[manage_customer_details['data-accessors']['name']]!=undefined ? val[manage_customer_details['data-accessors']['name']] : "")+'</td>'+
-					'<td class="peding_amt">'+(val[manage_customer_details['data-accessors']['prev_bal']]!=undefined ? val[manage_customer_details['data-accessors']['prev_bal']] : "")+'</td>'+
-					'<td class="loan_amount">'+(val[manage_customer_details['data-accessors']['loan_amount']]!=undefined ? val[manage_customer_details['data-accessors']['loan_amount']] : "")+'</td>'+
-					'<td class="roi">'+(val[manage_customer_details['data-accessors']['roi']]!=undefined ? val[manage_customer_details['data-accessors']['roi']] : "")+'</td>'+
-					'<td class="date">'+(val[manage_customer_details['data-accessors']['date']]!=undefined ? val[manage_customer_details['data-accessors']['date']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>'+
-					'<td class="balance">'+(val[manage_customer_details['data-accessors']['balance']]!=undefined ? val[manage_customer_details['data-accessors']['balance']] : "")+'</td>';
+					'<td class="id">'+(val[manage_customer_details['data-accessors']['id']]!=undefined ? val[manage_customer_details['data-accessors']['id']] : "")+'</td>'+
+					'<td class="name">'+(val[manage_customer_details['data-accessors']['name']]!=undefined ? val[manage_customer_details['data-accessors']['name']] : "")+'</td>'+
+					'<td class="agent">'+(val[manage_customer_details['data-accessors']['agent']]!=undefined ? val[manage_customer_details['data-accessors']['agent']] : "")+'</td>'+
+					'<td class="phone">'+(val[manage_customer_details['data-accessors']['phone']]!=undefined ? val[manage_customer_details['data-accessors']['phone']] : "")+'</td>'+
+					'<td class="relation">'+(val[manage_customer_details['data-accessors']['relation']]!=undefined ? val[manage_customer_details['data-accessors']['relation']] : "")+'</td>'+
+					'<td class="phone2">'+(val[manage_customer_details['data-accessors']['phone2']]!=undefined ? val[manage_customer_details['data-accessors']['phone2']] : "")+'</td>'+
+					'<td class="relation2">'+(val[manage_customer_details['data-accessors']['relation2']]!=undefined ? val[manage_customer_details['data-accessors']['relation2']] : "")+'</td>'+
+					'<td class="phone3">'+(val[manage_customer_details['data-accessors']['phone3']]!=undefined ? val[manage_customer_details['data-accessors']['phone3']] : "")+'</td>'+
+					'<td class="relation3">'+(val[manage_customer_details['data-accessors']['relation3']]!=undefined ? val[manage_customer_details['data-accessors']['relation3']] : "")+'</td>'+
+					'<td class="address">'+(val[manage_customer_details['data-accessors']['address']]!=undefined ? val[manage_customer_details['data-accessors']['address']] : "")+'</td>'+
+					'<td class="aadharNo">'+(val[manage_customer_details['data-accessors']['aadharNo']]!=undefined ? val[manage_customer_details['data-accessors']['aadharNo']] : "")+'</td>'+
+					'<td class="panNo">'+(val[manage_customer_details['data-accessors']['panNo']]!=undefined ? val[manage_customer_details['data-accessors']['panNo']] : "")+'</td>'+
+					'<td class="workAddress">'+(val[manage_customer_details['data-accessors']['workAddress']]!=undefined ? val[manage_customer_details['data-accessors']['workAddress']] : "")+'</td>'+
+					'<td class="grossPay">'+(val[manage_customer_details['data-accessors']['grossPay']]!=undefined ? val[manage_customer_details['data-accessors']['grossPay']] : "")+'</td>'+
+					'<td class="netPay">'+(val[manage_customer_details['data-accessors']['netPay']]!=undefined ? val[manage_customer_details['data-accessors']['netPay']] : "")+'</td>'+
+					'<td class="monthlyIncome">'+(val[manage_customer_details['data-accessors']['monthlyIncome']]!=undefined ? val[manage_customer_details['data-accessors']['monthlyIncome']] : "")+'</td>'+
+					'<td class="otherIncome">'+(val[manage_customer_details['data-accessors']['otherIncome']]!=undefined ? val[manage_customer_details['data-accessors']['otherIncome']] : "")+'</td>'+
+					'<td class="history">'+(val[manage_customer_details['data-accessors']['history']]!=undefined ? val[manage_customer_details['data-accessors']['history']] : "")+'</td>'+
+					'<td class="loanAmount">'+(val[manage_customer_details['data-accessors']['loanAmount']]!=undefined ? val[manage_customer_details['data-accessors']['loanAmount']] : "")+'</td>'+
+					'<td class="rateOfInterest">'+(val[manage_customer_details['data-accessors']['rateOfInterest']]!=undefined ? val[manage_customer_details['data-accessors']['rateOfInterest']] : "")+'</td>'+
+					'<td class="emi">'+(val[manage_customer_details['data-accessors']['emi']]!=undefined ? val[manage_customer_details['data-accessors']['emi']] : "")+'</td>'+
+					'<td class="property">'+(val[manage_customer_details['data-accessors']['property']]!=undefined ? val[manage_customer_details['data-accessors']['property']] : "")+'</td>'+
+					'<td class="collectionDate">'+(val[manage_customer_details['data-accessors']['collectionDate']]!=undefined ? val[manage_customer_details['data-accessors']['collectionDate']] : "")+'</td>'+
+					'<td class="emiAmount">'+(val[manage_customer_details['data-accessors']['emiAmount']]!=undefined ? val[manage_customer_details['data-accessors']['emiAmount']] : "")+'</td>'+'</tr>';
 					$("#electric_table").append(append_table);
 				});
 			}else{
