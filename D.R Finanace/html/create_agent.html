@@ -50,7 +50,9 @@
                             <th scope="col" style="width :10%;">
                                 Mobile Number
                             </th>
-                            
+                            <th>
+                                Update
+                            </th>
                             <th scope="col">
                                 <!-- <button class="btn btn-info test_btn">Freeze</button>
                                 <button class="btn btn-danger test_btn">Delete</button> -->
@@ -58,9 +60,6 @@
                             </th>
                             <th>
                                 Delete
-                            </th>
-                            <th>
-                                Update
                             </th>
                         </tr>
                     </thead>
@@ -122,6 +121,56 @@
                                             </button> -->
                                             <button class="btn btn-primary test_btn create-agent-btn"  id="create" name="submit" type="submit">
                                                 Add Agent
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-style">
+                    <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade" id="updateUser" role="dialog" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="" style="text-align: center;">
+                                        Update Agent details
+                                    </h3>
+                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                        <span aria-hidden="true">
+                                            ×
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" style="background-color: #D3D3D3;">
+                                    <form action="/" class="form-style" id="updateuser" method="POST">
+                                        <label for="newUsername">
+                                            Agent ID
+                                        </label>
+                                        <input autofocus="" class="form-control" id="Userid" name="Userid" placeholder="User Id" required="" type="userid" disabled/>
+                                        <br/>
+                                        <label for="newUsername">
+                                            Agent Name
+                                        </label>
+                                        <input autofocus="" class="form-control" id="newUsername" name="newUsername" placeholder="Username" required="" type="username" disabled/>
+                                        <br/>
+                                        <label for="newMobile">
+                                            Mobile No
+                                        </label>
+                                        <input class="form-control" id="newMobile" name="newMobile" pattern="[0-9]{10}" placeholder="Phone No" required="" type="tel"/>
+                                        <br/>
+                                        
+                                        <div class="modal-footer">
+                                            <!-- <button class="btn btn-success test_btn" id="freeze" name="submit" type="submit">
+                                                Freeze
+                                            </button>
+                                            <button class="btn btn-danger test_btn" id="delete" name="submit" type="submit">
+                                                Delete
+                                            </button> -->
+                                            <button class="btn btn-primary test_btn update-agent-btn"  id="updateUser" name="submit" type="submit">
+                                                Update
                                             </button>
 
                                         </div>
