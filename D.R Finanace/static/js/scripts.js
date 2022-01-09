@@ -55,7 +55,7 @@ const create_agent_details = {
 		'freeze-agent': "agent-details/freeze",
 		'search-agent': 'data-store',
 		'update-agent' : 'data-store',
-		'data-accessors':{'agentId': 'agent_id','agentIdByCompany': 'agent_id_by_company' , 'agentName': 'agent_name', 'mobileNo': 'ph_no', 'freezeStatus': 'freeze_status'}	
+		'data-accessors':{'agentId': 'agent_id' , 'agentName': 'agent_name', 'mobileNo': 'ph_no', 'freezeStatus': 'freeze_status'}	
 };
 
 const login_details = {
@@ -745,7 +745,7 @@ function renderAgentTable(page_no){
 		if(total_count > 0){
 			console.log('abcd')
 			$.each(data['dataList'], function(index,val){
-				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val['agent_id']!=undefined ? val['agent_id'] : "")+'</td><td class="agent_id_by_company">'+(val['agent_id']!=undefined ? val['agent_id_by_company'] : "")+'</td><td>'+(val['agent_name']!=undefined ? val['agent_name'] : "")+'</td><td class="phone">'+(val['ph_no']!=undefined ? val['ph_no'] : "")+'</td>' + "<td><button class='btn btn-info' freezeId="+create_agent_details['agentId']+" onclick='freezeOrUnfreezeAgent(this.freezeId)'>" +val['freeze_status']== true ? "Freeze" : "Unfreeze" +"</button></td>" + "<td><button class='btn btn-danger' deleteId="+create_agent_details['agentId']+" onclick='deleteAgent(this.deleteId)'>Delete</button></td>" + "<td><button class='btn btn-info' updateId="+create_agent_details['agentId']+" onclick='updateAgent(this.updateId)'>Update</button></td>" ;
+				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val['agent_id']!=undefined ? val['agent_id'] : "")+'</td><td>'+(val['agent_name']!=undefined ? val['agent_name'] : "")+'</td><td class="phone">'+(val['ph_no']!=undefined ? val['ph_no'] : "")+'</td>' + "<td><button class='btn btn-info' freezeId="+create_agent_details['agentId']+" onclick='freezeOrUnfreezeAgent(this.freezeId)'>" +val['freeze_status']== true ? "Freeze" : "Unfreeze" +"</button></td>" + "<td><button class='btn btn-danger' deleteId="+create_agent_details['agentId']+" onclick='deleteAgent(this.deleteId)'>Delete</button></td>" + "<td><button class='btn btn-info' updateId="+create_agent_details['agentId']+" onclick='updateAgent(this.updateId)'>Update</button></td>" ;
 
 				// var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val[create_agent_details['agentId']]!=undefined ? val[create_agent_details['agentId']] : "")+'</td><td class="agent_id_by_company">'+(val[create_agent_details['agentIDByCompany']]!=undefined ? val[create_agent_details['agentIDByCompany']] : "")+'</td><td class="agent_name">'+(val[create_agent_details['agentName']]!=undefined ? val[create_agent_details['agentName']] : "")+'</td><td class="phone">'+(val[create_agent_details['mobileNo']]!=undefined ? val[create_agent_details['mobileNo']] : "")+'</td>' + "<td><button class='btn btn-info' freezeId="+create_agent_details['agentId']+" onclick='freezeAgent(this.freezeId)'>Freeze</button></td>" + "<td><button class='btn btn-danger' deleteId="+create_agent_details['agentId']+" onclick='deleteAgent(this.deleteId)'>Delete</button></td>" ;
 				$("#electric_table").append(append_table);
