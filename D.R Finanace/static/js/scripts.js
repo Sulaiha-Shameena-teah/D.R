@@ -1,5 +1,6 @@
 
-const base_url = "https://protected-garden-36193.herokuapp.com/";
+//const base_url = "https://protected-garden-36193.herokuapp.com/";
+const base_url = "http://localhost:8080/";
 
 const daily_work_details = {
 	'page-value':'daily-work',
@@ -33,17 +34,28 @@ const manage_customer_details = {
 };
 const create_customer_details = {
 	'page-value':'create-customer',
-	'store-endpoint':"data-store",
-	'data-accessors':{'id':'customer_id','name':'customer_name','phone': 'phone_number', 'relation': 'relation', 'address': 'address', 'aadharNo': 'aadhar_number', 'panNo': 'pan_number', 'workAddress': 'work_address', 'grossPay': 'gross_pay', 'netPay': 'net_pay', 'monthlyIncome' : 'monthly_income', 'otherIncome': 'other_income', 'history': 'history', 'loanAmount': 'loan_amount', 'rateOfInterest': 'rate_of_interest', 'emi': 'emi', 'property': 'property'}	
+	'store-endpoint':"customer/insert",
+	'data-accessors':{'id':'customer_id','name':'customer_name','agent' : 'agent','phone': 'ph_no_primary', 'relation': 'relation_primary','phone2': 'ph_no_secondary', 'relation2': 'relation_secondary','phone3': 'ph_no_tertiary', 'relation3': 'relation_tertiary', 'address': 'house_address', 'aadharNo': 'aadhar_no', 'panNo': 'pan_no', 'workAddress': 'work_address', 'grossPay': 'gross_pay', 'netPay': 'net_pay', 'monthlyIncome' : 'monthly_income', 'otherIncome': 'other_income', 'history': 'customer_history', 'loanAmount': 'loan_amount', 'rateOfInterest': 'rate_of_interest', 'emi': 'emi_or_monthly','emiAmount':'amount', 'property': 'property'}	
 };
 
-const create_agent_details = {
+/*const create_agent_details = {
 	'page-value':'create-agent',
 	'data-endpoint':"data-retrieve",
 	'store-endpoint':"data-store",
 	'delete-agent': "data-store",
 	'freeze-agent': "data-store",
 	'data-accessors':{'agentId': 'agent_id', 'agentIdByCompany': 'agent_id_by_company' ,'agentName': 'agent_name', 'mobileNo': 'mobile_number'}	
+};*/
+
+const create_agent_details = {
+		'page-value':'create-agent',
+		'data-endpoint':"agent-details/all-agent-details",
+		'store-endpoint':"agent-details/insert",
+		'delete-agent': "agent-details/delete",
+		'freeze-agent': "agent-details/freeze",
+		'search-agent': 'data-store',
+		'update-agent' : 'data-store',
+		'data-accessors':{'agentId': 'agent_id','agentIdByCompany': 'agent_id_by_company' , 'agentName': 'agent_name', 'mobileNo': 'ph_no', 'freezeStatus': 'freeze_status'}	
 };
 
 const login_details = {
@@ -53,6 +65,15 @@ const login_details = {
 	'delete-agent': "data-store",
 	'freeze-agent': "data-store",
 	'data-accessors':{ 'userName': 'user_name', 'password': 'password'}	
+}
+
+const customer_repayment_page = {
+	'page-value':'customer-repayment-page',
+	'data-endpoint':"data-retrieve",
+	'store-endpoint':"data-store",
+	'delete-agent': "data-store",
+	'freeze-agent': "data-store",
+	'data-accessors':{ 'id':'customer_id', 'name':'customer_name', 'loanAmount': 'loan_amount','loanSanctionDate': 'loan_sanction_date', 'emiPerMonth': 'emi_per_month', 'noOfDuesPaid': 'no_of_dues_paid', 'outStanding' : 'out_standing', 'agentId': 'agent_id', 'update': 'update'}
 }
 
 const rows_per_page =10;
@@ -71,6 +92,8 @@ $(document).ready(function(){
 			renderCustomerTable(1);
 		}else if($("#page_type").val() == create_agent_details['page-value']){
 			renderAgentTable(1);
+		}else if($("#page_type").val() == customer_repayment_page['page-value']){
+			renderCustomerRepaymentPage(1);
 		}
 		// load the table intially based on page type
 	
@@ -255,26 +278,27 @@ $(document).ready(function(){
 		var request_json = {
 			// customer_id: $('#Userid').val() ? $('#Userid').val() : 0,
 			customer_name: $('#newUsername').val() ? $('#newUsername').val() : 0,
-			phone_number: $('#newMobile').val() ? $('#newMobile').val() : 0, 
-			relation: $('#relation1').val() ? $('#relation1').val() : 0,
-			phone_number_2: $('#newMobile2').val() ? $('#newMobile2').val() : 0, 
-			relation2: $('#relation2').val() ? $('#relation2').val() : 0,
-			phone_number_3: $('#newMobile3').val() ? $('#newMobile3').val() : 0, 
-			relation3: $('#relation3').val() ? $('#relation3').val() : 0,
-			address: $('#address').val() ? $('#address').val() : 0,
-			aadhar_number: $('#aadharno').val() ? $('#aadharno').val() : 0,
-			pan_number: $('#panno').val() ? $('#panno').val() : 0,
+			agent: $('#agent').val() ? $('#agent').val() : 0,
+			ph_no_primary: $('#newMobile').val() ? $('#newMobile').val() : 0, 
+			relation_primary: $('#relation1').val() ? $('#relation1').val() : 0,
+			ph_no_secondary: $('#newMobile2').val() ? $('#newMobile2').val() : 0, 
+			relation_secondary: $('#relation2').val() ? $('#relation2').val() : 0,
+			ph_no_tertiary: $('#newMobile3').val() ? $('#newMobile3').val() : 0, 
+			relation_tertiary: $('#relation3').val() ? $('#relation3').val() : 0,
+			house_address: $('#address').val() ? $('#address').val() : 0,
+			aadhar_no: $('#aadharno').val() ? $('#aadharno').val() : 0,
+			pan_no: $('#panno').val() ? $('#panno').val() : 0,
 			work_address: $('#workaddress').val() ? $('#workaddress').val() : 0,
 			gross_pay: $('#grosspay').val() ? $('#grosspay').val() : 0,
 			net_pay: $('#netpay').val() ? $('#netpay').val() : 0,
 			monthly_income: $('#moninc').val() ? $('#moninc').val() : 0,
 			other_income: $('#otherinc').val() ? $('#otherinc').val() : 0,
-			history: $('#history').val() ? $('#history').val() : 0,
+			customer_history: $('#history').val() ? $('#history').val() : 0,
 			loan_amount: $('#loanamt').val() ? $('#loanamt').val() : 0,
 			rate_of_interest: $('#rateofint').val() ? $('#rateofint').val() : 0,
-			emi: $('#newType').val() ? $('#newType').val() : 0,
+			emi_or_monthly: $('#newType').val() ? $('#newType').val() : 0,
 			property: $('#property').val() ? $('#property').val() : 0,
-			emiAmount: $('#emiAmount').val() ? $('#emiAmount').val() : 0,
+			amount: $('#emiAmount').val() ? $('#emiAmount').val() : 0,
 			collectionDate: $('#collectionDate').val() ? $('#collectionDate').val() : 0,
 			
 		}
@@ -360,6 +384,31 @@ $(document).ready(function(){
 				alert(data_updated_message);
 			});
 	});
+	$(document).on('click','#updateCustomerRepayment',function(e){
+		e.preventDefault();
+		if(!checkValid($('#newMobile').val()) && !checkValid($('#address').val()) && !checkValid($('#agent').val())){
+			console.log('enter req fields')
+			return false;
+		}
+		var post_endpoint = customer_repayment_page['store-endpoint'];
+		var request_json = {
+			phone_number: $('#newMobile').val() ? $('#newMobile').val() : 0,
+			address: $('#address').val() ? $('#address').val() : 0,
+			agent: $('#agent').val() ? $('#agent').val() : 0,
+		}
+		$.ajax({
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+				},		
+			method: "POST",
+			data:JSON.stringify(request_json),
+			url: base_url+post_endpoint
+			}).done(function( data) {
+				alert(data_updated_message);
+			});
+	});
+
 });
 
 function renderDailyWorkTable(page_no){
@@ -681,9 +730,9 @@ function renderAgentTable(page_no){
 	var search_val = $("[name='search']").val();
 	$.ajax({
 	method: "GET",
-	url: base_url+ create_agent_details['data-endpoint'] +"?limit="+limit+"&offset="+offset+"&query="+search_val
+	url: base_url+ create_agent_details['search-agent'] +"?limit="+limit+"&offset="+offset+"&query="+search_val
 	}).done(function( data) {
-		data = JSON.parse(data);
+		//data = JSON.parse(data);
 		//console.log("data.length");
 		//console.log(data);
 		var total_count;
@@ -696,7 +745,7 @@ function renderAgentTable(page_no){
 		if(total_count > 0){
 			console.log('abcd')
 			$.each(data['dataList'], function(index,val){
-				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val['agent_id']!=undefined ? val['agent_id'] : "")+'</td><td class="agent_id_by_company">'+(val['agent_id']!=undefined ? val['agent_id_by_company'] : "")+'</td><td>'+(val['agent_name']!=undefined ? val['agent_name'] : "")+'</td><td class="phone">'+(val['ph_no']!=undefined ? val['ph_no'] : "")+'</td>' + "<td><button class='btn btn-info' freezeId="+create_agent_details['agentId']+" onclick='freezeAgent(this.freezeId)'>Freeze</button></td>" + "<td><button class='btn btn-danger' deleteId="+create_agent_details['agentId']+" onclick='deleteAgent(this.deleteId)'>Delete</button></td>" ;
+				var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val['agent_id']!=undefined ? val['agent_id'] : "")+'</td><td class="agent_id_by_company">'+(val['agent_id']!=undefined ? val['agent_id_by_company'] : "")+'</td><td>'+(val['agent_name']!=undefined ? val['agent_name'] : "")+'</td><td class="phone">'+(val['ph_no']!=undefined ? val['ph_no'] : "")+'</td>' + "<td><button class='btn btn-info' freezeId="+create_agent_details['agentId']+" onclick='freezeOrUnfreezeAgent(this.freezeId)'>" +val['freeze_status']== true ? "Freeze" : "Unfreeze" +"</button></td>" + "<td><button class='btn btn-danger' deleteId="+create_agent_details['agentId']+" onclick='deleteAgent(this.deleteId)'>Delete</button></td>" + "<td><button class='btn btn-info' updateId="+create_agent_details['agentId']+" onclick='updateAgent(this.updateId)'>Update</button></td>" ;
 
 				// var append_table = '<tr class="row_'+index+'"><td>'+(index+1)+'</td><td class="agent_id">'+(val[create_agent_details['agentId']]!=undefined ? val[create_agent_details['agentId']] : "")+'</td><td class="agent_id_by_company">'+(val[create_agent_details['agentIDByCompany']]!=undefined ? val[create_agent_details['agentIDByCompany']] : "")+'</td><td class="agent_name">'+(val[create_agent_details['agentName']]!=undefined ? val[create_agent_details['agentName']] : "")+'</td><td class="phone">'+(val[create_agent_details['mobileNo']]!=undefined ? val[create_agent_details['mobileNo']] : "")+'</td>' + "<td><button class='btn btn-info' freezeId="+create_agent_details['agentId']+" onclick='freezeAgent(this.freezeId)'>Freeze</button></td>" + "<td><button class='btn btn-danger' deleteId="+create_agent_details['agentId']+" onclick='deleteAgent(this.deleteId)'>Delete</button></td>" ;
 				$("#electric_table").append(append_table);
@@ -713,7 +762,7 @@ function renderAgentTable(page_no){
   });
 }
 
-function freezeAgent(freezeId) {
+function freezeOrUnfreezeAgent(freezeId) {
 	console.log("freeze",freezeId);
 	const freezeURL = base_url + create_agent_details['freeze-agent'] + "/"  + freezeId
 	$.ajax({
@@ -730,6 +779,16 @@ function deleteAgent(deleteId) {
 	$.ajax({
 		method: "DELETE",
 		url: deleteURL
+		}).done(function( data) {
+			alert(data_updated_message);
+		});
+}
+
+function updateAgent(updatedId) {
+	const updateURL = base_url + create_agent_details['update-agent'] + "/"  + updatedId
+	$.ajax({
+		method: "POST",
+		url: updateURL
 		}).done(function( data) {
 			alert(data_updated_message);
 		});
@@ -927,7 +986,7 @@ function renderMonthlyTable(page_no){
 
 		if(total_count > 0){
 			$.each(data['dailyWorksList'], function(index,val){
-				var append_table = '<tr><td>'+(index+1)+'</td><td>'+val[monthly_report_accessor['cust_id']]+'</td><td>'+val[monthly_report_accessor['name']]+'</td><td>'+val[monthly_report_accessor['prev_bal']]+'</td><td>'+val[monthly_report_accessor['received_amt']]+'</td><td>'+val[monthly_report_accessor['current_bal']]+'</td><td>'+val[monthly_report_accessor['status']]+'</td><td>'+val[monthly_report_accessor['date']]+'</td>'+val[monthly_report_accessor['v1']]+'</td><td>'+val[monthly_report_accessor['v2']]+'</td><td>'+val[monthly_report_accessor['v3']]+'</td><td>'+val[monthly_report_accessor['v4']]+'</td><td>'+val[monthly_report_accessor['v5']]+'</td><td>'+val[monthly_report_accessor['v6']]+'</td><td>'+val[monthly_report_accessor['v7']]+'</td><td>'+val[monthly_report_accessor['v8']]+'</td><td>'+val[monthly_report_accessor['v9']]+'</td><td>'+val[monthly_report_accessor['v10']]+'</td><td>'+val[monthly_report_accessor['v11']]+'</td><td>'+val[monthly_report_accessor['v11']]+'</td><td>'+val[monthly_report_accessor['v12']]+'</td><td>'+val[monthly_report_accessor['v13']]+'</td><td>'+val[monthly_report_accessor['v14']]+'</td><td>'+val[monthly_report_accessor['v15']]+'</td><td>'+val[monthly_report_accessor['v16']]+'</td><td>'+val[monthly_report_accessor['v17']]+'</td><td>'+val[monthly_report_accessor['v18']]+'</td><td>'+val[monthly_report_accessor['v19']]+'</td><td>'+val[monthly_report_accessor['v20']]+'</td><td>'+val[monthly_report_accessor['v21']]+'</td><td>'+val[monthly_report_accessor['v22']]+'</td><td>'+val[monthly_report_accessor['v23']]+'</td><td>'+val[monthly_report_accessor['v24']]+'</td><td>'+val[monthly_report_accessor['v25']]+'</td><td>'+val[monthly_report_accessor['v26']]+'</td><td>'+val[monthly_report_accessor['v27']]+'</td><td>'+val[monthly_report_accessor['v28']]+'</td><td>'+val[monthly_report_accessor['v29']]+'</td><td>'+val[monthly_report_accessor['v30']]+'</td><td>'+val[monthly_report_accessor['v31']]+'</td></tr>';
+				var append_table = '<tr><td>'+(index+1)+'</td><td>'+val[monthly_report_accessor['cust_id']]+'</td><td>'+val[monthly_report_accessor['name']]+'</td><td>'+val[monthly_report_accessor['agent_id']]+'</td><td>'+val[monthly_report_accessor['prev_bal']]+'</td><td>'+val[monthly_report_accessor['received_amt']]+'</td><td>'+val[monthly_report_accessor['current_bal']]+'</td><td>'+val[monthly_report_accessor['status']]+'</td><td>'+val[monthly_report_accessor['date']]+'</td>'+val[monthly_report_accessor['v1']]+'</td><td>'+val[monthly_report_accessor['v2']]+'</td><td>'+val[monthly_report_accessor['v3']]+'</td><td>'+val[monthly_report_accessor['v4']]+'</td><td>'+val[monthly_report_accessor['v5']]+'</td><td>'+val[monthly_report_accessor['v6']]+'</td><td>'+val[monthly_report_accessor['v7']]+'</td><td>'+val[monthly_report_accessor['v8']]+'</td><td>'+val[monthly_report_accessor['v9']]+'</td><td>'+val[monthly_report_accessor['v10']]+'</td><td>'+val[monthly_report_accessor['v11']]+'</td><td>'+val[monthly_report_accessor['v11']]+'</td><td>'+val[monthly_report_accessor['v12']]+'</td><td>'+val[monthly_report_accessor['v13']]+'</td><td>'+val[monthly_report_accessor['v14']]+'</td><td>'+val[monthly_report_accessor['v15']]+'</td><td>'+val[monthly_report_accessor['v16']]+'</td><td>'+val[monthly_report_accessor['v17']]+'</td><td>'+val[monthly_report_accessor['v18']]+'</td><td>'+val[monthly_report_accessor['v19']]+'</td><td>'+val[monthly_report_accessor['v20']]+'</td><td>'+val[monthly_report_accessor['v21']]+'</td><td>'+val[monthly_report_accessor['v22']]+'</td><td>'+val[monthly_report_accessor['v23']]+'</td><td>'+val[monthly_report_accessor['v24']]+'</td><td>'+val[monthly_report_accessor['v25']]+'</td><td>'+val[monthly_report_accessor['v26']]+'</td><td>'+val[monthly_report_accessor['v27']]+'</td><td>'+val[monthly_report_accessor['v28']]+'</td><td>'+val[monthly_report_accessor['v29']]+'</td><td>'+val[monthly_report_accessor['v30']]+'</td><td>'+val[monthly_report_accessor['v31']]+'</td></tr>';
 	
 				
 				$("#electric_table").append(append_table);
@@ -988,4 +1047,56 @@ function checkValid(v){
 
 function getOffsetValue(page_no,page_rows){
 	return (page_no*page_rows) - page_rows;
+}
+
+function renderCustomerRepaymentPage(page_no){
+	$(".loading").show();
+	$("#electric_table tbody").html("");
+	$("#page").hide();
+	console.log('renderCustomerRepaymentPage');
+	var offset = page_no*rows_per_page;
+	var limit= (page_no*rows_per_page) - rows_per_page;
+
+	var search_val = $("[name='search']").val();
+	$.ajax({
+	method: "GET",
+	url: base_url+ customer_repayment_page['data-endpoint'] +"?limit="+limit+"&offset="+offset+"&query="+search_val+"&agent_id="+agent_id
+	}).done(function( data) {
+		//data = JSON.parse(data);
+		//console.log("data.length");
+		//console.log(data);
+		var total_count;
+		if(data['dataSize'] != undefined){
+			total_count = data['dataSize'];
+		}
+		//console.log("total_count");
+		//console.log(total_count);
+
+		if(total_count > 0){
+			$.each(data['dailyWorksList'], function(index,val){
+				var append_table = '<tr><td>'+(index+1)+'</td><td>'+val[customer_repayment_page['customer_id']]+'</td><td>'+val[customer_repayment_page['customer_name']]+'</td><td>'+val[customer_repayment_page['loan_amount']]+'</td><td>'+val[customer_repayment_page['loan_sanction_date']]+'</td><td>'+val[customer_repayment_page['emi_per_month']]+'</td><td>'+val[customer_repayment_page['no_of_dues_paid']]+'</td><td>'+val[customer_repayment_page['out_standing']]+'</td>'+val[customer_repayment_page['agent_id']]+'</td><td>'+"<button updateId="+customer_repayment_page['customer_id']+"data-target='editModal'>Update</button>"+'</td><td>'+"<button deleteId="+customer_repayment_page['customer_id']+" onclick='deleteCustomerRepaymentPage(this.deleteId)'>Delete</button>"+'</td></tr>';
+	
+				
+				$("#electric_table").append(append_table);
+			});
+			if(total_count >10){
+				renderPagination(total_count,page_no,10,1);
+			}
+
+		}else{
+			var append_table = '<tr><td colspan="11">No Data Found</td></tr>';
+			$("#electric_table").append(append_table);
+		}
+		$(".loading").hide();
+  });
+}
+function deleteCustomerRepaymentPage(deleteId) {
+	console.log("delete",deleteId);
+	const deleteURL = base_url + customer_repayment_page['delete-agent'] + "/"  + deleteId
+	$.ajax({
+		method: "DELETE",
+		url: deleteURL
+		}).done(function( data) {
+			alert(data_updated_message);
+		});
 }
